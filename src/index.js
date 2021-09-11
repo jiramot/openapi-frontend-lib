@@ -1,5 +1,11 @@
+import {getOS, login} from './common'
+
 const init = (data) => {
     console.log(data)
 }
-module.exports.init = init
 
+export {
+    init,
+    getOS,
+    login
+}
