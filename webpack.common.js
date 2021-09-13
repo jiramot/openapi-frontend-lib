@@ -6,6 +6,7 @@ const config = {
     output: {
         filename: 'sdk.js',
         library: "sdk",
+        libraryTarget: "umd",
         path: path.resolve(__dirname, 'dist'),
     },
     module: {
