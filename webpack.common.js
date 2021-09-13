@@ -2,7 +2,7 @@ const path = require('path');
 
 const config = {
     // watch: true,
-    entry: './src/index.js',
+    entry: ['@babel/polyfill', './src/index.js'],
     output: {
         filename: 'sdk.js',
         library: "sdk",
