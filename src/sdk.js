@@ -23,14 +23,6 @@ Sdk.prototype = {
             } finally {
                 resolve()
             }
-
-
-            //     .then(() => {
-            //         debugger
-            //         console.log("then")
-            //         resolve()
-            //     }).catch((err) => reject(err))
-
         }
 
         if (arguments.length === 1) {
@@ -48,14 +40,18 @@ const initContext = async (data) => {
         throw Err("INVALID_CONFIG", "You need to define `clientId` for sdk.login()")
     }
     storage.setItem(TOKEN_CONSTANT.CLIENT_ID, data.clientId)
+    const search = window.location.search
+    const fragment = window.location.hash
+    const jsonFragment = toJSON(fragment)
     const loginTemp = storage.getItem(TOKEN_CONSTANT.LOGIN_TMP)
-    if (loginTemp == null) {
-        console.log("null login temp")
-        console.log("do nothing")
-    } else {
+    debugger;
+    if (jsonFragment.access_token != null) {
+        debugger;
+        console.log("have access token in fragment")
+        storage.setItem(TOKEN_CONSTANT.ACCESS_TOKEN, jsonFragment.access_token)
+    } else if (loginTemp != null) {
+        debugger;
         console.log("have login temp")
-        const search = window.location.search
-        const fragment = window.location.hash
         if (search != null) {
             console.log("case callback from auth code")
             console.log("search")
@@ -64,11 +60,8 @@ const initContext = async (data) => {
             const clientId = storage.getItem(TOKEN_CONSTANT.CLIENT_ID)
             const res = await getAccessToken(json.code, clientId, loginTemp.codeVerifier)
             storage.setItem(TOKEN_CONSTANT.ACCESS_TOKEN, res.access_token)
+            storage.removeItem(TOKEN_CONSTANT.LOGIN_TMP)
             debugger;
-        } else if (fragment != null) {
-            console.log("initialize from native")
-            console.log("fragment")
-            console.log(fragment)
         }
         debugger;
     }
