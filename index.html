@@ -5,12 +5,13 @@
     <title>Getting Started</title>
 </head>
 <body>
-    <script src="./dist/sdk.js"></script>
-    <script>
-        sdk.init({clientId: "1234"})
-        let os = sdk.getOS()
-        console.log(os)
-        sdk.login()
-    </script>
+<script src="./dist/sdk.js"></script>
+<script>
+    sdk.init({clientId: "1234"}, () => {
+            let os = sdk.getOS()
+            console.log(os)
+        },
+        (err) => console.error(err))
+</script>
 </body>
 </html>

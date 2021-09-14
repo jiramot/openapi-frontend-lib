@@ -1,0 +1,5 @@
+const TOKEN_CONSTANT = {
+    LOGIN_TMP: "LOGIN_TMP"
+}
+
+export {TOKEN_CONSTANT}
