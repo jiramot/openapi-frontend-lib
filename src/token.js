@@ -5,7 +5,7 @@ const getAccessToken = async (code, clientId, codeVerifier) => {
         grant_type: 'authorization_code',
         client_id: clientId,
         code: code,
-        code_verifier: code
+        code_verifier: codeVerifier
     };
 
     let formBody = [];
