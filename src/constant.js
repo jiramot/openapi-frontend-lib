@@ -1,5 +1,6 @@
 const TOKEN_CONSTANT = {
-    LOGIN_TMP: "LOGIN_TMP"
+    LOGIN_TMP: "LOGIN_TMP",
+    CLIENT_ID: "CLIENT_ID",
 }
 
 export {TOKEN_CONSTANT}
