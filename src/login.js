@@ -1,16 +1,17 @@
 import fetch from 'isomorphic-fetch'
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64'
-import {setItem} from './storage'
+import * as storage from './storage'
 import {TOKEN_CONSTANT} from './constant'
 
 const login = async () => {
+    debugger;
     console.log('login')
     const codeVerifier = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" // generateRandomString(43)
     const state = generateRandomString(12)
     const codeChallenge = base64UrlEncode(sha256(codeVerifier))
 
-    setItem(TOKEN_CONSTANT.LOGIN_TMP, {codeVerifier: codeVerifier})
+    storage.setItem(TOKEN_CONSTANT.LOGIN_TMP, {codeVerifier: codeVerifier})
     console.log(`code_verifier=${codeVerifier}, code_charlenge=${codeChallenge}`)
     const query = new URLSearchParams({
         "response_type": "code",

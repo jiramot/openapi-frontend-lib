@@ -6,12 +6,21 @@
 </head>
 <body>
 <script src="./dist/sdk.js"></script>
+<p id="loginStatus"></p>
 <script>
     sdk.init({clientId: "1234"}, () => {
+            debugger;
             let os = sdk.getOS()
             console.log(os)
+            if (!sdk.isLoggedIn()) {
+                document.getElementById("loginStatus").innerHTML = "No Login"
+                sdk.login()
+            } else {
+                document.getElementById("loginStatus").innerHTML = "Loging In"
+            }
         },
-        (err) => console.error(err))
+        (err) => console.error(err)
+    )
     // sdk.init({clientId: "12345"}).then(()=>{
     //   let os = sdk.getOS()
     //   console.log(os)

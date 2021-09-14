@@ -3,5 +3,8 @@
     "standard",
     "prettier"
   ],
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "rules": {
+    "no-debugger": "off"
+  }
 }
