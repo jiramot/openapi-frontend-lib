@@ -7,7 +7,7 @@ import {TOKEN_CONSTANT} from './constant'
 const login = async () => {
     debugger;
     console.log('login')
-    const codeVerifier = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" // generateRandomString(43)
+    const codeVerifier = generateRandomString(43)
     const state = generateRandomString(12)
     const codeChallenge = base64UrlEncode(sha256(codeVerifier))
 
