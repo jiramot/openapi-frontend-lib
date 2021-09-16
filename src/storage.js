@@ -15,7 +15,7 @@ const getItem = (key) => {
     return value
 }
 const removeItem = (key) => {
-    window.localStorage.removeItem('name')
+    window.localStorage.removeItem(key)
 }
 const clear = () => {
     window.localStorage.clear()
