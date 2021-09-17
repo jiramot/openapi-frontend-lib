@@ -1,4 +1,5 @@
 import fetch from "isomorphic-fetch";
+import {getUrl, URL_CONSTANT} from "./constant";
 
 const getAccessToken = async (code, clientId, codeVerifier) => {
     const details = {
@@ -15,7 +16,7 @@ const getAccessToken = async (code, clientId, codeVerifier) => {
         formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    const response = await fetch("http://192.168.1.114:8080/oauth2/token?",
+    const response = await fetch(getUrl(URL_CONSTANT.TOKEN),
         {
             method: "POST",
             headers: {

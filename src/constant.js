@@ -6,4 +6,14 @@ const TOKEN_CONSTANT = {
     EXPIRES: "EXPIRES"
 }
 
-export {TOKEN_CONSTANT}
+const URL_CONSTANT = {
+    BASE_URL: "http://192.168.1.114:8080",
+    AUTH: "/oauth2/auth",
+    TOKEN: "/oauth2/token"
+}
+
+const getUrl = (suffix) => {
+    return `${URL_CONSTANT.BASE_URL}${suffix}`
+}
+
+export {TOKEN_CONSTANT, URL_CONSTANT, getUrl}

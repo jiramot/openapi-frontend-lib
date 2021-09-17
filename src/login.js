@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch'
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64'
 import * as storage from './storage'
-import {TOKEN_CONSTANT} from './constant'
+import {getUrl, TOKEN_CONSTANT, URL_CONSTANT} from './constant'
 
 const login = async () => {
     console.log('login')
@@ -20,7 +20,7 @@ const login = async () => {
         "code_challenge": codeChallenge,
         "code_challenge_method": "S256"
     }).toString()
-    const response = await fetch("http://192.168.1.114:8080/oauth2/auth?" + query)
+    const response = await fetch(getUrl(URL_CONSTANT.AUTH) + "?" + query)
     const data = await response.json()
     const redirectUrl = data.redirect_url
     window.location.href = redirectUrl
