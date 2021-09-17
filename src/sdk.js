@@ -35,7 +35,6 @@ Sdk.prototype = {
 }
 
 const initContext = async (data) => {
-    debugger;
     console.log("init data")
     if (data.clientId == null) {
         throw Err("INVALID_CONFIG", "You need to define `clientId` for sdk.login()")
@@ -45,16 +44,13 @@ const initContext = async (data) => {
     const fragment = window.location.hash
     const jsonFragment = toJSON(fragment)
     const loginTemp = storage.getItem(TOKEN_CONSTANT.LOGIN_TMP)
-    debugger;
     if (Cookies.get(TOKEN_CONSTANT.EXPIRES) == null) {
         storage.removeItem(TOKEN_CONSTANT.ACCESS_TOKEN)
     }
     if (jsonFragment.access_token != null) {
-        debugger;
         console.log("have access token in fragment")
         storage.setItem(TOKEN_CONSTANT.ACCESS_TOKEN, jsonFragment.access_token)
     } else if (loginTemp != null) {
-        debugger;
         console.log("have login temp")
         if (search != null) {
             console.log("case callback from auth code")
@@ -62,7 +58,6 @@ const initContext = async (data) => {
             const json = toJSON(search)
             console.log(json)
             const state = storage.getItem(TOKEN_CONSTANT.LOGIN_STATE)
-            debugger
             if (json.state !== state) {
                 console.error("detect csrf, invalid state")
                 return
@@ -73,9 +68,7 @@ const initContext = async (data) => {
             const expiresAt = new Date(res.expires_at * 1000)
             Cookies.set(TOKEN_CONSTANT.EXPIRES, res.expires_at, {expires: expiresAt, path: '/'})
             storage.removeItem(TOKEN_CONSTANT.LOGIN_TMP)
-            debugger;
         }
-        debugger;
     }
 }
 

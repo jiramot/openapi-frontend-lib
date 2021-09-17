@@ -5,7 +5,6 @@ import * as storage from './storage'
 import {TOKEN_CONSTANT} from './constant'
 
 const login = async () => {
-    debugger;
     console.log('login')
     const codeVerifier = generateRandomString(43)
     const state = generateRandomString(12)
