@@ -12,11 +12,12 @@ const login = async () => {
     const codeChallenge = base64UrlEncode(sha256(codeVerifier))
 
     storage.setItem(TOKEN_CONSTANT.LOGIN_TMP, {codeVerifier: codeVerifier})
+    storage.setItem(TOKEN_CONSTANT.LOGIN_STATE, state)
     console.log(`code_verifier=${codeVerifier}, code_charlenge=${codeChallenge}`)
     const query = new URLSearchParams({
         "response_type": "code",
         "client_id": "1234",
-        "stage": state,
+        "state": state,
         "code_challenge": codeChallenge,
         "code_challenge_method": "S256"
     }).toString()

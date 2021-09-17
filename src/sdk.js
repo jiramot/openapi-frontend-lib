@@ -2,6 +2,7 @@ import * as storage from './storage'
 import {TOKEN_CONSTANT} from './constant'
 import Err from './error'
 import getAccessToken from './token'
+import Cookies from 'js-cookie'
 
 const Sdk = function () {
 
@@ -45,6 +46,9 @@ const initContext = async (data) => {
     const jsonFragment = toJSON(fragment)
     const loginTemp = storage.getItem(TOKEN_CONSTANT.LOGIN_TMP)
     debugger;
+    if (Cookies.get(TOKEN_CONSTANT.EXPIRES) == null) {
+        storage.removeItem(TOKEN_CONSTANT.ACCESS_TOKEN)
+    }
     if (jsonFragment.access_token != null) {
         debugger;
         console.log("have access token in fragment")
@@ -57,14 +61,29 @@ const initContext = async (data) => {
             console.log("search")
             const json = toJSON(search)
             console.log(json)
+            const state = storage.getItem(TOKEN_CONSTANT.LOGIN_STATE)
+            debugger
+            if (json.state !== state) {
+                console.error("detect csrf, invalid state")
+                return
+            }
             const clientId = storage.getItem(TOKEN_CONSTANT.CLIENT_ID)
             const res = await getAccessToken(json.code, clientId, loginTemp.codeVerifier)
             storage.setItem(TOKEN_CONSTANT.ACCESS_TOKEN, res.access_token)
+            const expiresAt = new Date(res.expires_at * 1000)
+            Cookies.set(TOKEN_CONSTANT.EXPIRES, res.expires_at, {expires: expiresAt, path: '/'})
             storage.removeItem(TOKEN_CONSTANT.LOGIN_TMP)
             debugger;
         }
         debugger;
     }
+}
+
+const clean = () => {
+    Object.keys(TOKEN_CONSTANT).forEach((key) => {
+        storage.removeItem(TOKEN_CONSTANT[key])
+    })
+    Cookies.remove(TOKEN_CONSTANT.EXPIRES)
 }
 
 const toJSON = (query) => {
@@ -88,4 +107,4 @@ const isLoggedIn = () => {
 
 const sdk = new Sdk()
 export default sdk.init
-export {isLoggedIn}
+export {isLoggedIn, clean}
