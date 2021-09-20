@@ -7,16 +7,31 @@
 <body>
 <script src="./dist/sdk.js"></script>
 <p id="loginStatus"></p>
+<p id="firstname"></p>
+<p id="lastname"></p>
+<p id="cif"></p>
 <script>
+    function runApp() {
+        console.log("runapp")
+        document.getElementById("loginStatus").innerHTML = "Loging In"
+        sdk.getProfile().then(profile => {
+                console.log("profile")
+                console.log(profile)
+                document.getElementById("firstname").innerHTML = '<b>firstname:</b> ' + profile.firstname
+                document.getElementById("lastname").innerHTML = '<b>lastname:</b> ' + profile.lastname
+                document.getElementById("cif").innerHTML = '<b>cif:</b> ' + profile.cif
+            }
+        )
+    }
+
     sdk.init({clientId: "1234"}, () => {
-            debugger;
             let os = sdk.getOS()
             console.log(os)
             if (!sdk.isLoggedIn()) {
                 document.getElementById("loginStatus").innerHTML = "No Login"
                 sdk.login()
             } else {
-                document.getElementById("loginStatus").innerHTML = "Loging In"
+                runApp()
             }
         },
         (err) => console.error(err)

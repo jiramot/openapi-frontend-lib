@@ -7,13 +7,22 @@ const TOKEN_CONSTANT = {
 }
 
 const URL_CONSTANT = {
-    BASE_URL: "http://192.168.1.114:8080",
+    BASE_URL: "http://localhost:8080",
     AUTH: "/oauth2/auth",
-    TOKEN: "/oauth2/token"
+    TOKEN: "/oauth2/token",
+}
+
+const OPEN_API_CONSTANT = {
+    BASE_URL: "http://localhost:8000",
+    PROFILE: "/profile"
 }
 
 const getUrl = (suffix) => {
     return `${URL_CONSTANT.BASE_URL}${suffix}`
 }
 
-export {TOKEN_CONSTANT, URL_CONSTANT, getUrl}
+const getOpenApiUrl = (suffix) => {
+    return `${OPEN_API_CONSTANT.BASE_URL}${suffix}`
+}
+
+export {TOKEN_CONSTANT, URL_CONSTANT, OPEN_API_CONSTANT, getUrl, getOpenApiUrl}
