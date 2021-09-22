@@ -6,6 +6,7 @@
 </head>
 <body>
 <script src="./dist/sdk.js"></script>
+<p id="clientId"></p>
 <p id="loginStatus"></p>
 <p id="firstname"></p>
 <p id="lastname"></p>
@@ -13,7 +14,8 @@
 <script>
     function runApp() {
         console.log("runapp")
-        document.getElementById("loginStatus").innerHTML = "Loging In"
+        document.getElementById("clientId").innerHTML = '<b>ClientId :</b> ' + sdk.getClientId()
+        document.getElementById("loginStatus").innerHTML = '<b>loginStatus :</b> Success'
         sdk.getProfile().then(profile => {
                 console.log("profile")
                 console.log(profile)
@@ -32,7 +34,7 @@
     sdk.init({clientId: "6789"}, () => {
             debugger
             if (!sdk.isLoggedIn()) {
-                document.getElementById("loginStatus").innerHTML = "No Login"
+                document.getElementById("loginStatus").innerHTML =  '<b>loginStatus :</b> None'
                 sdk.login()
             } else {
                 runApp()

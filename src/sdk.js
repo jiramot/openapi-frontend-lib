@@ -167,6 +167,9 @@ const getProfile = async () => {
     return data
 }
 
+const getClientId = () => {
+    return clientId
+}
 const sdk = new Sdk()
 export default sdk.init
-export {isLoggedIn, clean, login, getProfile}
+export {isLoggedIn, clean, login, getProfile, getClientId}
