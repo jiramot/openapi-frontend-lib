@@ -21,12 +21,16 @@
                 document.getElementById("lastname").innerHTML = '<b>lastname:</b> ' + profile.lastname
                 document.getElementById("cif").innerHTML = '<b>cif:</b> ' + profile.cif
             }
-        )
+        ).catch((err) => {
+            console.log(err)
+            document.getElementById("firstname").innerHTML = '<b>firstname:</b> no permission'
+            document.getElementById("lastname").innerHTML = '<b>lastname:</b> no permission'
+            document.getElementById("cif").innerHTML = '<b>cif:</b> no permission'
+        })
     }
 
-    sdk.init({clientId: "1234"}, () => {
+    sdk.init({clientId: "6789"}, () => {
             debugger
-            console.log(sdk.clientId)
             if (!sdk.isLoggedIn()) {
                 document.getElementById("loginStatus").innerHTML = "No Login"
                 sdk.login()

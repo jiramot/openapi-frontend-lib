@@ -6,8 +6,10 @@ const TOKEN_CONSTANT = {
     EXPIRES: "EXPIRES"
 }
 
+const PREFIX = "SDK"
+
 const URL_CONSTANT = {
-    BASE_URL: "http://localhost:8080",
+    BASE_URL: "http://localhost:8000",
     AUTH: "/oauth2/auth",
     TOKEN: "/oauth2/token",
 }
@@ -25,4 +27,4 @@ const getOpenApiUrl = (suffix) => {
     return `${OPEN_API_CONSTANT.BASE_URL}${suffix}`
 }
 
-export {TOKEN_CONSTANT, URL_CONSTANT, OPEN_API_CONSTANT, getUrl, getOpenApiUrl}
+export {TOKEN_CONSTANT, URL_CONSTANT, OPEN_API_CONSTANT, PREFIX, getUrl, getOpenApiUrl}

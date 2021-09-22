@@ -1,11 +1,19 @@
 version: '3.8'
 
 services: 
-  client:
+  client1:
     image: nginx
-    container_name: client
+    container_name: client1
     ports:
       - 9100:80
     volumes: 
       - ./dist:/usr/share/nginx/html/dist
       - ./index.html:/usr/share/nginx/html/index.html
+  client2:
+    image: nginx
+    container_name: client2
+    ports:
+      - 9101:80
+    volumes:
+      - ./dist:/usr/share/nginx/html/dist
+      - ./index2.html:/usr/share/nginx/html/index.html
