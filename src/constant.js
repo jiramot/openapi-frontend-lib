@@ -9,13 +9,13 @@ const TOKEN_CONSTANT = {
 const PREFIX = "SDK"
 
 const URL_CONSTANT = {
-    BASE_URL: "http://localhost:8000",
+    BASE_URL: "https://access.authz.one",
     AUTH: "/oauth2/auth",
     TOKEN: "/oauth2/token",
 }
 
 const OPEN_API_CONSTANT = {
-    BASE_URL: "http://localhost:8000",
+    BASE_URL: "https://access.authz.one",
     PROFILE: "/profile"
 }
 

@@ -42,7 +42,6 @@ const initContext = async (data) => {
     console.log("init data")
     clientId = data.clientId;
 
-    debugger;
     if (clientId == null) {
         throw Err("INVALID_CONFIG", "You need to define `clientId` for sdk.login()")
     }
@@ -52,16 +51,13 @@ const initContext = async (data) => {
     const jsonFragment = toJSON(fragment)
     const loginTemp = storage.getItem(clientId, TOKEN_CONSTANT.LOGIN_TMP)
 
-    debugger
     if (cookie.get(clientId, TOKEN_CONSTANT.EXPIRES) == null) {
-        debugger
         storage.removeItem(clientId, TOKEN_CONSTANT.ACCESS_TOKEN)
     }
-    if (jsonFragment.access_token != null) {
+    if (jsonFragment.access_token != null && isInClient()) {
         console.log("have access token in fragment")
         storage.setItem(clientId, TOKEN_CONSTANT.ACCESS_TOKEN, jsonFragment.access_token)
     } else if (loginTemp != null) {
-        debugger;
         console.log("have login temp")
         if (search != null) {
             console.log("case callback from auth code")
@@ -77,14 +73,12 @@ const initContext = async (data) => {
             storage.setItem(clientId, TOKEN_CONSTANT.ACCESS_TOKEN, res.access_token)
             const expiresAt = new Date(res.expires_at * 1000)
             cookie.set(clientId, TOKEN_CONSTANT.EXPIRES, res.expires_at, {expires: expiresAt, path: '/'})
-            debugger
             storage.removeItem(clientId, TOKEN_CONSTANT.LOGIN_TMP)
         }
     }
 }
 
 const clean = () => {
-    debugger;
     Object.keys(TOKEN_CONSTANT).forEach((key) => {
         storage.removeItem(clientId, TOKEN_CONSTANT[key])
     })
@@ -103,7 +97,6 @@ const toJSON = (query) => {
     return JSON.parse(JSON.stringify(result));
 }
 const isLoggedIn = () => {
-    debugger
     const accessToken = storage.getItem(clientId, TOKEN_CONSTANT.ACCESS_TOKEN)
     if (accessToken === null) {
         return false
@@ -170,6 +163,12 @@ const getProfile = async () => {
 const getClientId = () => {
     return clientId
 }
+
+const isInClient = () => {
+    const userAgent = window.navigator.userAgent.toLowerCase()
+    return /AUTHZ/.test(userAgent) ? true : false
+}
+
 const sdk = new Sdk()
 export default sdk.init
-export {isLoggedIn, clean, login, getProfile, getClientId}
+export {isLoggedIn, clean, login, getProfile, getClientId, isInClient}
