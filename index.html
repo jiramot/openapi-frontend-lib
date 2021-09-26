@@ -3,6 +3,10 @@
 <head>
     <meta charset="utf-8"/>
     <title>Getting Started</title>
+    <script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
+    <script>
+        var vConsole = new VConsole();
+    </script>
 </head>
 <body>
 <script src="./dist/sdk.js"></script>
@@ -27,7 +31,6 @@
     }
 
     sdk.init({clientId: "1234"}, () => {
-            debugger
             console.log(sdk.clientId)
             if (!sdk.isLoggedIn()) {
                 document.getElementById("loginStatus").innerHTML =  '<b>loginStatus :</b> None'
