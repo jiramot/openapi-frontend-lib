@@ -10,6 +10,7 @@
 </head>
 <body>
 <script src="./dist/sdk.js"></script>
+<p id="isInClient"></p>
 <p id="clientId"></p>
 <p id="loginStatus"></p>
 <p id="firstname"></p>
@@ -28,11 +29,15 @@
                 document.getElementById("cif").innerHTML = '<b>cif:</b> ' + profile.cif
             }
         )
+        let isInClient = sdk.isInClient()
+        document.getElementById("isInClient").innerHTML =  '<b>isInClient : </b> ' + isInClient
     }
 
     sdk.init({clientId: "1234"}, () => {
             console.log(sdk.clientId)
             if (!sdk.isLoggedIn()) {
+                let isInClient = sdk.isInClient()
+                document.getElementById("isInClient").innerHTML =  '<b>isInClient : </b> ' + isInClient
                 document.getElementById("loginStatus").innerHTML =  '<b>loginStatus :</b> None'
                 sdk.login()
             } else {

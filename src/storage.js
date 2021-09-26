@@ -21,7 +21,7 @@ const getItem = (clientId, attribute) => {
     if (!isInClient()) {
         value = window.localStorage.getItem(key)
     } else {
-        value = window.sessionStorage.setItem(key)
+        value = window.sessionStorage.getItem(key)
     }
     if (!_.isString()) {
         value = JSON.parse(value)

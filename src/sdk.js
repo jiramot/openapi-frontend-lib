@@ -166,7 +166,7 @@ const getClientId = () => {
 
 const isInClient = () => {
     const userAgent = window.navigator.userAgent.toLowerCase()
-    return /AUTHZ/.test(userAgent) ? true : false
+    return /authz/.test(userAgent)
 }
 
 const sdk = new Sdk()
