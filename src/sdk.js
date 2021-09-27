@@ -15,12 +15,10 @@ let clientId = ""
 Sdk.prototype = {
     init: function () {
         const sdk1 = async function (data) {
-            console.log("init with promise")
             await initContext(data)
         }
 
         const sdk2 = async function (data, resolve, reject) {
-            console.log("init with callback")
             try {
                 await initContext(data)
             } catch (err) {
@@ -61,7 +59,6 @@ const initContext = async (data) => {
         console.log("have login temp")
         if (search != null) {
             console.log("case callback from auth code")
-            console.log("search")
             const json = toJSON(search)
             console.log(json)
             const state = storage.getItem(clientId, TOKEN_CONSTANT.LOGIN_STATE)
@@ -147,7 +144,6 @@ const getProfile = async () => {
     const accessToken = storage.getItem(clientId, TOKEN_CONSTANT.ACCESS_TOKEN)
     const authorizationHeader = `Bearer ${accessToken}`
     const url = getOpenApiUrl(OPEN_API_CONSTANT.PROFILE);
-    console.log(url)
     const response = await fetch(url,
         {
             method: 'GET',
@@ -156,7 +152,6 @@ const getProfile = async () => {
             }
         })
     const data = await response.json()
-    console.log(data)
     return data
 }
 

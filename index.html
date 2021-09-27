@@ -22,8 +22,6 @@
         document.getElementById("clientId").innerHTML = '<b>ClientId :</b> ' + sdk.getClientId()
         document.getElementById("loginStatus").innerHTML = '<b>loginStatus :</b> Success'
         sdk.getProfile().then(profile => {
-                console.log("profile")
-                console.log(profile)
                 document.getElementById("firstname").innerHTML = '<b>firstname:</b> ' + profile.firstname
                 document.getElementById("lastname").innerHTML = '<b>lastname:</b> ' + profile.lastname
                 document.getElementById("cif").innerHTML = '<b>cif:</b> ' + profile.cif
@@ -34,7 +32,6 @@
     }
 
     sdk.init({clientId: "1234"}, () => {
-            console.log(sdk.clientId)
             if (!sdk.isLoggedIn()) {
                 let isInClient = sdk.isInClient()
                 document.getElementById("isInClient").innerHTML =  '<b>isInClient : </b> ' + isInClient
