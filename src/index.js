@@ -1,4 +1,4 @@
 import {getOS} from './util'
-import sdk, {getClientId, getProfile, isLoggedIn, login, isInClient} from "./sdk";
+import sdk, {getToken, getClientId, getProfile, isInClient, isLoggedIn, login} from "./sdk";
 
-export {sdk as init, getOS, login, isLoggedIn, getProfile, getClientId, isInClient}
+export {sdk as init, getOS, login, isLoggedIn, getProfile, getClientId, isInClient, getToken}

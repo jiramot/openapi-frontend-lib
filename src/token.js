@@ -1,7 +1,7 @@
 import fetch from "isomorphic-fetch";
 import {getUrl, URL_CONSTANT} from "./constant";
 
-const getAccessToken = async (code, clientId, codeVerifier) => {
+const getToken = async (code, clientId, codeVerifier) => {
     const details = {
         grant_type: 'authorization_code',
         client_id: clientId,
@@ -27,4 +27,4 @@ const getAccessToken = async (code, clientId, codeVerifier) => {
     return await response.json()
 }
 
-export default getAccessToken
+export default getToken

@@ -1,7 +1,7 @@
 import * as storage from './storage'
 import {getOpenApiUrl, getUrl, OPEN_API_CONSTANT, TOKEN_CONSTANT, URL_CONSTANT} from './constant'
 import Err from './error'
-import getAccessToken from './token'
+import getToken from './token'
 import * as cookie from './cookie'
 import sha256 from "crypto-js/sha256";
 import fetch from "isomorphic-fetch";
@@ -66,7 +66,7 @@ const initContext = async (data) => {
                 console.error("detect csrf, invalid state")
                 return
             }
-            const res = await getAccessToken(json.code, clientId, loginTemp.codeVerifier)
+            const res = await getToken(json.code, clientId, loginTemp.codeVerifier)
             storage.setItem(clientId, TOKEN_CONSTANT.ACCESS_TOKEN, res.access_token)
             const expiresAt = new Date(res.expires_at * 1000)
             cookie.set(clientId, TOKEN_CONSTANT.EXPIRES, res.expires_at, {expires: expiresAt, path: '/'})
@@ -141,7 +141,7 @@ const generateRandomString = (length) => {
 }
 
 const getProfile = async () => {
-    const accessToken = storage.getItem(clientId, TOKEN_CONSTANT.ACCESS_TOKEN)
+    const accessToken = getAccessToken()
     const authorizationHeader = `Bearer ${accessToken}`
     const url = getOpenApiUrl(OPEN_API_CONSTANT.PROFILE);
     const response = await fetch(url,
@@ -151,8 +151,7 @@ const getProfile = async () => {
                 Authorization: authorizationHeader
             }
         })
-    const data = await response.json()
-    return data
+    return await response.json()
 }
 
 const getClientId = () => {
@@ -164,6 +163,10 @@ const isInClient = () => {
     return /authz/.test(userAgent)
 }
 
+const getAccessToken = () => {
+    return storage.getItem(clientId, TOKEN_CONSTANT.ACCESS_TOKEN)
+}
+
 const sdk = new Sdk()
 export default sdk.init
-export {isLoggedIn, clean, login, getProfile, getClientId, isInClient}
+export {isLoggedIn, clean, login, getProfile, getClientId, isInClient, getToken}
